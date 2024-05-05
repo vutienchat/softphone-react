@@ -23,6 +23,10 @@ const PhoneContent = () => {
           sx={{
             "& .MuiButtonBase-root": {
               minHeight: "auto",
+              px: 1.5,
+            },
+            "& .MuiTabs-flexContainer": {
+              height: 1,
             },
           }}
         >

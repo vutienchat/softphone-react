@@ -2,24 +2,14 @@ import Box from "@mui/material/Box";
 import IconButton from "@mui/material/IconButton";
 import TextField from "@mui/material/TextField";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
-import { useState } from "react";
 
-//@ts-expect-error use CDN
-const sforce = window.sforce;
+interface Props {
+  isExpand: boolean;
+  onChangePanelWidth: () => void;
+}
 
-const Phone = () => {
-  const [isExpand, setIsExpand] = useState<boolean>(false);
-
-  const handleChangePanelWidth = () => {
-    sforce.opencti.setSoftphonePanelWidth({
-      widthPX: isExpand ? 350 : 900,
-      callback: (response: any) => {
-        if (response.success) {
-          setIsExpand(!isExpand);
-        }
-      },
-    });
-  };
+const Phone = (props: Props) => {
+  const { isExpand, onChangePanelWidth } = props;
 
   return (
     <Box>
@@ -32,7 +22,7 @@ const Phone = () => {
         }}
       >
         <TextField fullWidth id="standard-basic" variant="standard" />
-        <IconButton onClick={handleChangePanelWidth} size="small">
+        <IconButton onClick={onChangePanelWidth} size="small">
           <ArrowForwardIosIcon
             sx={{ ...(isExpand && { transform: "rotateY(180deg)" }) }}
             color="action"
