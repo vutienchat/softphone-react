@@ -10,12 +10,12 @@ const SoftPhone = () => {
   const [isExpand, setIsExpand] = useState<boolean>(false);
 
   const handleChangePanelExpand = (isExpand: boolean) => {
-    setIsExpand(isExpand);
+    // setIsExpand(isExpand);
     sforce.opencti.setSoftphonePanelWidth({
       widthPX: isExpand ? 350 : 900,
       callback: (response: any) => {
         if (response.success) {
-          setIsExpand(!isExpand);
+          setIsExpand(isExpand);
         }
       },
     });
