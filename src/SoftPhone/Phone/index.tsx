@@ -68,8 +68,7 @@ const Phone = (props: Props) => {
     });
 
     agent.on("remotestream", (event: any) => {
-      // this.template.querySelector(".remoteView").srcObject = event.stream;
-      if (ref.current?.srcObject) {
+      if (ref.current) {
         ref.current.srcObject = event.stream;
         audio.srcObject = event.stream;
       }
@@ -128,8 +127,8 @@ const Phone = (props: Props) => {
     <Box>
       <video
         ref={ref}
-        plays-inline
-        auto-play
+        playsInline
+        autoPlay
         muted
         style={{ display: "none" }}
       ></video>
