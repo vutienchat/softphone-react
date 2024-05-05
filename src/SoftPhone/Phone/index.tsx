@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Box from "@mui/material/Box";
 
 import Dialpad from "./components/Dialpad";
@@ -26,6 +26,8 @@ const ACCOUNT_AS7 = {
 
 const Phone = (props: Props) => {
   const { onChangePanelExpand } = props;
+  const ref = useRef<HTMLVideoElement>(null);
+  const [device, setDevice] = useState<any>(null);
   const [phoneStatus, setPhoneStatus] = useState(PHONE_STATUS.DIALPAD);
 
   useEffect(() => {
@@ -54,6 +56,7 @@ const Phone = (props: Props) => {
           console.log("monitoring failed");
           // this.connected=false
         });
+      setDevice(device);
       // this.device = device;
     });
 
@@ -66,7 +69,10 @@ const Phone = (props: Props) => {
 
     agent.on("remotestream", (event: any) => {
       // this.template.querySelector(".remoteView").srcObject = event.stream;
-      audio.srcObject = event.stream;
+      if (ref.current?.srcObject) {
+        ref.current.srcObject = event.stream;
+        audio.srcObject = event.stream;
+      }
     });
 
     agent.on("call", (event: any) => {
@@ -96,6 +102,14 @@ const Phone = (props: Props) => {
     });
   }, [onChangePanelExpand]);
 
+  const handleAnswerCall = () => {
+    const call = device?.calls[0];
+    if (call?.localConnectionInfo === "alerting") {
+      call.answerCall({ audio: true, video: false });
+      setPhoneStatus(PHONE_STATUS.CALLING);
+    }
+  };
+
   const show = () => {
     switch (phoneStatus) {
       case PHONE_STATUS.DIALPAD:
@@ -103,13 +117,24 @@ const Phone = (props: Props) => {
       case PHONE_STATUS.CALLING:
         return <ScreenCallAnswered />;
       case PHONE_STATUS.RINGING:
-        return <ScreenRinging />;
+        return <ScreenRinging onAnswerCall={handleAnswerCall} />;
       default:
         return null;
     }
   };
 
-  return <Box>{show()}</Box>;
+  return (
+    <Box>
+      <video
+        ref={ref}
+        plays-inline
+        auto-play
+        muted
+        style={{ display: "none" }}
+      ></video>
+      {show()}
+    </Box>
+  );
 };
 
 export default Phone;

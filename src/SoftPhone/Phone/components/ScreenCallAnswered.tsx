@@ -1,5 +1,5 @@
-const ScreenCallAnswered = () => {
-  return <div>ScreenCallAnswered</div>;
+const CallAnswered = () => {
+  return <div>CallAnswered</div>;
 };
 
-export default ScreenCallAnswered;
+export default CallAnswered;
