@@ -104,6 +104,7 @@ const Phone = (props: Props) => {
 
   const handleAnswerCall = () => {
     const call = device?.calls[0];
+    console.log("handleAnswerCall", device);
     if (call?.localConnectionInfo === "alerting") {
       call.answerCall({ audio: true, video: false });
       setPhoneStatus(PHONE_STATUS.CALLING);
