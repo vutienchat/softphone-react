@@ -9,8 +9,11 @@ interface Props {
 const ScreenRinging = (props: Props) => {
   const { onAnswerCall } = props;
   return (
-    <div onClick={onAnswerCall}>
-      <NumberKey sx={{ backgroundColor: "#28a745", color: "#fff" }}>
+    <div>
+      <NumberKey
+        sx={{ backgroundColor: "#28a745", color: "#fff" }}
+        onClick={onAnswerCall}
+      >
         <PhoneIcon fontSize="large" />
       </NumberKey>
     </div>
