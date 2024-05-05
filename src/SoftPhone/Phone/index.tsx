@@ -9,7 +9,7 @@ import ScreenCallAnswered from "./components/ScreenCallAnswered";
 const anCti = window.AnCti;
 interface Props {
   isExpand: boolean;
-  onChangePanelWidth: () => void;
+  onChangePanelExpand: (expand: boolean) => void;
 }
 
 const PHONE_STATUS = {
@@ -25,7 +25,7 @@ const ACCOUNT_AS7 = {
 };
 
 const Phone = (props: Props) => {
-  const { onChangePanelWidth } = props;
+  const { onChangePanelExpand } = props;
   const [phoneStatus, setPhoneStatus] = useState(PHONE_STATUS.DIALPAD);
 
   useEffect(() => {
@@ -76,7 +76,7 @@ const Phone = (props: Props) => {
           if (!event.call.autoAnswer) {
             console.log("alerting", call.name, call.callID);
             setPhoneStatus(PHONE_STATUS.RINGING);
-            onChangePanelWidth();
+            onChangePanelExpand(true);
           }
           break;
         case "connected":
@@ -94,7 +94,7 @@ const Phone = (props: Props) => {
           break;
       }
     });
-  }, [onChangePanelWidth]);
+  }, [onChangePanelExpand]);
 
   const show = () => {
     switch (phoneStatus) {

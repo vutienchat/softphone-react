@@ -11,11 +11,11 @@ const NUMBER_KEY = [1, 2, 3, 4, 5, 6, 7, 8, 9, "*", 0, "#"];
 
 interface Props {
   isExpand: boolean;
-  onChangePanelWidth: () => void;
+  onChangePanelExpand: (expand: boolean) => void;
 }
 
 const Dialpad = (props: Props) => {
-  const { isExpand, onChangePanelWidth } = props;
+  const { isExpand, onChangePanelExpand } = props;
 
   return (
     <Fragment>
@@ -28,7 +28,7 @@ const Dialpad = (props: Props) => {
         }}
       >
         <TextField fullWidth variant="standard" />
-        <IconButton onClick={onChangePanelWidth} size="small">
+        <IconButton onClick={() => onChangePanelExpand(!isExpand)} size="small">
           <ArrowForwardIosIcon
             sx={{ ...(isExpand && { transform: "rotateY(180deg)" }) }}
             color="action"
