@@ -23,7 +23,7 @@ const SoftPhone = () => {
 
   return (
     <Box
-      sx={{ height: "100%", display: "grid", gridTemplateColumns: "350px 1fr" }}
+      sx={{ height: "100%", display: "grid", gridTemplateColumns: "348px 1fr" }}
     >
       <Phone isExpand={isExpand} onChangePanelWidth={handleChangePanelWidth} />
       {isExpand && <PhoneContent />}
