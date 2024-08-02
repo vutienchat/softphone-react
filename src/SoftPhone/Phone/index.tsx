@@ -45,7 +45,7 @@ const Phone = (props: Props) => {
     });
 
     agent.on("applicationsessionstarted", () => {
-      const device = agent.getDevice("sip:1003@term.322");
+      const device = agent.getDevice("sip:1002@term.442");
       device
         .monitorStart({ rtc: true })
         .then(() => {
