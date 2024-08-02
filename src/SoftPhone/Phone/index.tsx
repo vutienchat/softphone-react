@@ -68,10 +68,10 @@ const Phone = (props: Props) => {
     });
 
     agent.on("remotestream", (event: any) => {
-      if (ref.current) {
-        ref.current.srcObject = event.stream;
-        audio.srcObject = event.stream;
-      }
+      // if (ref.current) {
+      //   ref.current.srcObject = event.stream;
+      //   audio.srcObject = event.stream;
+      // }
     });
 
     agent.on("call", (event: any) => {
